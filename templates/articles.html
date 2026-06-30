@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Articles - AI Operator Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="site-nav">
+        <a class="brand" href="{{ url_for('home') }}">AI Operator Hub</a>
+        <div>
+            <a href="{{ url_for('articles') }}">Articles</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Library</p>
+                <h1>AI tools and automation articles</h1>
+            </div>
+            <span class="count">{{ articles|length }} articles</span>
+        </header>
+
+        <section class="article-list">
+            {% for article in articles %}
+                <article class="article-row">
+                    <div>
+                        <p class="tag">{{ article.category }}</p>
+                        <h2><a href="{{ url_for('article_detail', slug=article.slug) }}">{{ article.title }}</a></h2>
+                        <p>{{ article.summary }}</p>
+                    </div>
+                    <span>{{ article.read_time }}</span>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ article.title }} - AI Operator Hub</title>
+    <meta name="description" content="{{ article.summary }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="site-nav">
+        <a class="brand" href="{{ url_for('home') }}">AI Operator Hub</a>
+        <div>
+            <a href="{{ url_for('articles') }}">Articles</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="article-page">
+        <article class="article-shell">
+            <a class="back-link" href="{{ url_for('articles') }}">Back to articles</a>
+            <p class="tag">{{ article.category }}</p>
+            <h1>{{ article.title }}</h1>
+            <p class="article-summary">{{ article.summary }}</p>
+            <div class="article-meta">
+                <span>{{ article.published }}</span>
+                <span>{{ article.read_time }}</span>
+            </div>
+
+            <div class="article-body">
+                {% for paragraph in article.body %}
+                    <p>{{ paragraph }}</p>
+                {% endfor %}
+            </div>
+        </article>
+
+        <section class="comment-section">
+            <h2>Join the discussion</h2>
+            <div id="disqus_thread"></div>
+        </section>
+
+        <script>
+            var disqus_config = function () {
+                this.page.url = "{{ canonical_url }}";
+                this.page.identifier = "{{ article.slug }}";
+                this.page.title = "{{ article.title }}";
+            };
+
+            (function() {
+                var d = document, s = d.createElement("script");
+                s.src = "https://{{ disqus_forum }}.disqus.com/embed.js";
+                s.setAttribute("data-timestamp", +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the comments.</noscript>
+    </main>
+</body>
+</html>
