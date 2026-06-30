@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Operator Hub</title>
+    <meta name="description" content="Practical AI tools, automation workflows, and operator guides for small business teams.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="site-nav">
+        <a class="brand" href="{{ url_for('home') }}">AI Operator Hub</a>
+        <div>
+            <a href="{{ url_for('articles') }}">Articles</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">AI tools and automation</p>
+            <h1>Build smarter workflows with practical AI agents.</h1>
+            <p>Guides, templates, and discussions for small teams that want to use AI to publish faster, automate routine work, and grow with less chaos.</p>
+            <a class="button" href="{{ url_for('articles') }}">Explore Articles</a>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="section-heading">
+            <p class="eyebrow">Start here</p>
+            <h2>Latest AI operator guides</h2>
+        </section>
+
+        <section class="article-grid">
+            {% for article in articles %}
+                <article class="article-card">
+                    <p class="tag">{{ article.category }}</p>
+                    <h3><a href="{{ url_for('article_detail', slug=article.slug) }}">{{ article.title }}</a></h3>
+                    <p>{{ article.summary }}</p>
+                    <span>{{ article.read_time }}</span>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
