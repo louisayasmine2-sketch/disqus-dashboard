@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ article.title }} - AI Operator Hub</title>
-    <meta name="description" content="{{ article.summary }}">
+    <meta name="description" content="{{ article.meta_description or article.summary }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -24,6 +24,7 @@
             <p class="article-summary">{{ article.summary }}</p>
             <div class="article-meta">
                 <span>{{ article.published }}</span>
+                <span>Updated {{ article.updated }}</span>
                 <span>{{ article.read_time }}</span>
             </div>
 
@@ -32,6 +33,21 @@
                     <p>{{ paragraph }}</p>
                 {% endfor %}
             </div>
+
+            <section class="article-extra">
+                <h2>Monetization angle</h2>
+                <p>{{ article.affiliate_angle }}</p>
+            </section>
+
+            <section class="article-extra">
+                <h2>FAQ</h2>
+                {% for item in article.faq %}
+                    <details>
+                        <summary>{{ item.question }}</summary>
+                        <p>{{ item.answer }}</p>
+                    </details>
+                {% endfor %}
+            </section>
         </article>
 
         <section class="comment-section">
