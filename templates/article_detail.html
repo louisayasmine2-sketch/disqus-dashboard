@@ -15,13 +15,7 @@
     {% include "_analytics.html" %}
 </head>
 <body>
-    <nav class="site-nav">
-        <a class="brand" href="{{ url_for('home') }}">AI Operator Hub</a>
-        <div>
-            <a href="{{ url_for('articles') }}">Articles</a>
-            <a href="{{ url_for('dashboard') }}">Dashboard</a>
-        </div>
-    </nav>
+    {% include "_nav.html" %}
 
     <main class="article-page">
         <article class="article-shell">
@@ -78,5 +72,6 @@
         </script>
         <noscript>Please enable JavaScript to view the comments.</noscript>
     </main>
+    {% include "_footer.html" %}
 </body>
 </html>
