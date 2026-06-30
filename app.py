@@ -72,6 +72,7 @@ def inject_site_settings():
     return {
         "site_url": os.getenv("SITE_URL", "").strip().rstrip("/"),
         "google_analytics_id": os.getenv("GOOGLE_ANALYTICS_ID", "").strip(),
+        "tool_finder_url": os.getenv("TOOL_FINDER_URL", "https://ai-tool-finder-web.onrender.com").strip(),
     }
 
 
