@@ -31,6 +31,7 @@
                         <p class="tag">{{ article.category }}</p>
                         <h2><a href="{{ url_for('article_detail', slug=article.slug) }}">{{ article.title }}</a></h2>
                         <p>{{ article.summary }}</p>
+                        <small>Target keyword: {{ article.keyword }}</small>
                     </div>
                     <span>{{ article.read_time }}</span>
                 </article>
