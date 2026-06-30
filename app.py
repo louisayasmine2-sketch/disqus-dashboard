@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -44,6 +45,19 @@ def get_site_url():
 def absolute_url(endpoint, **values):
     path = url_for(endpoint, **values)
     return f"{get_site_url()}{path}"
+
+
+def sitemap_date(value):
+    if not value:
+        return ""
+
+    for date_format in ("%Y-%m-%d", "%B %d, %Y"):
+        try:
+            return datetime.strptime(value, date_format).date().isoformat()
+        except ValueError:
+            pass
+
+    return ""
 
 
 @app.context_processor
@@ -143,7 +157,7 @@ def sitemap_xml():
     urls.extend(
         {
             "loc": absolute_url("article_detail", slug=article["slug"]),
-            "lastmod": article.get("updated", ""),
+            "lastmod": sitemap_date(article.get("updated", "")),
             "priority": "0.8",
         }
         for article in ARTICLES
