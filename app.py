@@ -25,6 +25,7 @@ client = DisqusClient(
 
 
 CONTENT_PATH = Path(__file__).parent / "content" / "articles.json"
+TOOLS_PATH = Path(__file__).parent / "content" / "tools.json"
 
 
 def load_articles():
@@ -32,7 +33,13 @@ def load_articles():
         return json.load(file)
 
 
+def load_tools():
+    with TOOLS_PATH.open(encoding="utf-8") as file:
+        return json.load(file)
+
+
 ARTICLES = load_articles()
+TOOLS = load_tools()
 
 
 def get_site_url():
@@ -88,6 +95,11 @@ def home():
 @app.route("/articles")
 def articles():
     return render_template("articles.html", articles=ARTICLES, canonical_url=absolute_url("articles"))
+
+
+@app.route("/tools")
+def tools():
+    return render_template("tools.html", tools=TOOLS, canonical_url=absolute_url("tools"))
 
 
 @app.route("/about")
@@ -149,6 +161,7 @@ def sitemap_xml():
     urls = [
         {"loc": absolute_url("home"), "priority": "1.0"},
         {"loc": absolute_url("articles"), "priority": "0.9"},
+        {"loc": absolute_url("tools"), "priority": "0.8"},
         {"loc": absolute_url("about"), "priority": "0.6"},
         {"loc": absolute_url("contact"), "priority": "0.6"},
         {"loc": absolute_url("privacy_policy"), "priority": "0.5"},
