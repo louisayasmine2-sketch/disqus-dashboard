@@ -50,6 +50,19 @@ a:hover {
     flex-wrap: wrap;
 }
 
+.nav-cta {
+    border-radius: 8px;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 10px 14px;
+    font-weight: 800;
+}
+
+.nav-cta:hover {
+    background: var(--accent-dark);
+    color: #ffffff;
+}
+
 .brand {
     color: var(--ink);
     font-size: 1rem;
@@ -112,6 +125,13 @@ a:hover {
     line-height: 1.7;
 }
 
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -122,6 +142,11 @@ a:hover {
     color: #ffffff;
     padding: 0 18px;
     font-weight: 800;
+}
+
+.button-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .button:hover {
@@ -264,6 +289,10 @@ h2 {
 }
 
 .directory-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
     border: 1px solid var(--line);
     border-radius: 8px;
     background: var(--panel);
@@ -274,6 +303,29 @@ h2 {
 .directory-intro p {
     margin: 0;
     color: var(--muted);
+    line-height: 1.7;
+}
+
+.site-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border: 1px solid #b6ddd7;
+    border-radius: 8px;
+    background: #effaf8;
+    margin-top: 24px;
+    padding: clamp(20px, 4vw, 32px);
+}
+
+.site-cta h2 {
+    margin-bottom: 10px;
+}
+
+.site-cta p:not(.eyebrow) {
+    max-width: 660px;
+    margin: 0;
+    color: #2f3a4a;
     line-height: 1.7;
 }
 
@@ -485,6 +537,10 @@ h2 {
     padding: 22px;
 }
 
+.cta-panel .button {
+    margin-top: 8px;
+}
+
 .related-list {
     display: grid;
     gap: 10px;
@@ -581,6 +637,8 @@ h2 {
     .page-header,
     .thread-card,
     .article-row,
+    .directory-intro,
+    .site-cta,
     .post-card header {
         align-items: flex-start;
         grid-template-columns: 1fr;
