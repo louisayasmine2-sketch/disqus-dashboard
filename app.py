@@ -76,6 +76,26 @@ def articles():
     return render_template("articles.html", articles=ARTICLES, canonical_url=absolute_url("articles"))
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html", canonical_url=absolute_url("about"))
+
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html", canonical_url=absolute_url("contact"))
+
+
+@app.route("/privacy-policy")
+def privacy_policy():
+    return render_template("privacy_policy.html", canonical_url=absolute_url("privacy_policy"))
+
+
+@app.route("/affiliate-disclosure")
+def affiliate_disclosure():
+    return render_template("affiliate_disclosure.html", canonical_url=absolute_url("affiliate_disclosure"))
+
+
 @app.route("/article")
 def legacy_article():
     return redirect(url_for("article_detail", slug=ARTICLES[0]["slug"]))
@@ -115,6 +135,10 @@ def sitemap_xml():
     urls = [
         {"loc": absolute_url("home"), "priority": "1.0"},
         {"loc": absolute_url("articles"), "priority": "0.9"},
+        {"loc": absolute_url("about"), "priority": "0.6"},
+        {"loc": absolute_url("contact"), "priority": "0.6"},
+        {"loc": absolute_url("privacy_policy"), "priority": "0.5"},
+        {"loc": absolute_url("affiliate_disclosure"), "priority": "0.5"},
     ]
     urls.extend(
         {
