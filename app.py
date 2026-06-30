@@ -39,6 +39,12 @@ def dashboard():
 
     return render_template("dashboard.html", threads=threads, error=error)
 
+@app.route("/article")
+def article():
+    return render_template(
+        "article.html",
+        disqus_forum=os.getenv("DISQUS_FORUM", "")
+    )
 
 @app.route("/thread/<thread_id>")
 def thread_detail(thread_id):
