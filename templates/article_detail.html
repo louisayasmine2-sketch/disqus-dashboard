@@ -35,10 +35,48 @@
                 {% endfor %}
             </div>
 
+            {% if article.recommended_tools %}
+                <section class="article-extra">
+                    <h2>Recommended tool stack</h2>
+                    <div class="tool-table">
+                        <div class="tool-row tool-head">
+                            <span>Use case</span>
+                            <span>What to look for</span>
+                            <span>Best for</span>
+                        </div>
+                        {% for tool in article.recommended_tools %}
+                            <div class="tool-row">
+                                <span>{{ tool.use_case }}</span>
+                                <span>{{ tool.criteria }}</span>
+                                <span>{{ tool.best_for }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
             <section class="article-extra">
                 <h2>Monetization angle</h2>
                 <p>{{ article.affiliate_angle }}</p>
             </section>
+
+            {% if article.cta %}
+                <section class="article-extra cta-panel">
+                    <h2>{{ article.cta.title }}</h2>
+                    <p>{{ article.cta.body }}</p>
+                </section>
+            {% endif %}
+
+            {% if article.related %}
+                <section class="article-extra">
+                    <h2>Related guides</h2>
+                    <ul class="related-list">
+                        {% for item in article.related %}
+                            <li><a href="{{ url_for('article_detail', slug=item.slug) }}">{{ item.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
 
             <section class="article-extra">
                 <h2>FAQ</h2>
