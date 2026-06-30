@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, abort, redirect, render_template, request, url_for
+from flask import Flask, Response, abort, redirect, render_template, request, url_for
 
 from database import close_db, get_cached_posts, get_cached_threads, init_db, save_posts, save_threads
 from disqus_client import DisqusClient, DisqusClientError
@@ -34,6 +34,26 @@ def load_articles():
 ARTICLES = load_articles()
 
 
+def get_site_url():
+    configured_url = os.getenv("SITE_URL", "").strip().rstrip("/")
+    if configured_url:
+        return configured_url
+    return request.url_root.rstrip("/")
+
+
+def absolute_url(endpoint, **values):
+    path = url_for(endpoint, **values)
+    return f"{get_site_url()}{path}"
+
+
+@app.context_processor
+def inject_site_settings():
+    return {
+        "site_url": os.getenv("SITE_URL", "").strip().rstrip("/"),
+        "google_analytics_id": os.getenv("GOOGLE_ANALYTICS_ID", "").strip(),
+    }
+
+
 @app.before_request
 def prepare_database():
     init_db()
@@ -48,12 +68,12 @@ def get_article(slug):
 
 @app.route("/")
 def home():
-    return render_template("home.html", articles=ARTICLES[:3])
+    return render_template("home.html", articles=ARTICLES[:3], canonical_url=absolute_url("home"))
 
 
 @app.route("/articles")
 def articles():
-    return render_template("articles.html", articles=ARTICLES)
+    return render_template("articles.html", articles=ARTICLES, canonical_url=absolute_url("articles"))
 
 
 @app.route("/article")
@@ -71,8 +91,52 @@ def article_detail(slug):
         "article_detail.html",
         article=article,
         disqus_forum=os.getenv("DISQUS_FORUM", ""),
-        canonical_url=request.url,
+        canonical_url=absolute_url("article_detail", slug=slug),
     )
+
+
+@app.route("/robots.txt")
+def robots_txt():
+    body = "\n".join(
+        [
+            "User-agent: *",
+            "Allow: /",
+            "Disallow: /dashboard",
+            "Disallow: /thread/",
+            f"Sitemap: {absolute_url('sitemap_xml')}",
+            "",
+        ]
+    )
+    return Response(body, mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    urls = [
+        {"loc": absolute_url("home"), "priority": "1.0"},
+        {"loc": absolute_url("articles"), "priority": "0.9"},
+    ]
+    urls.extend(
+        {
+            "loc": absolute_url("article_detail", slug=article["slug"]),
+            "lastmod": article.get("updated", ""),
+            "priority": "0.8",
+        }
+        for article in ARTICLES
+    )
+
+    items = []
+    for item in urls:
+        lastmod = f"<lastmod>{item['lastmod']}</lastmod>" if item.get("lastmod") else ""
+        items.append(
+            f"<url><loc>{item['loc']}</loc>{lastmod}<changefreq>weekly</changefreq><priority>{item['priority']}</priority></url>"
+        )
+
+    body = '<?xml version="1.0" encoding="UTF-8"?>'
+    body += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    body += "".join(items)
+    body += "</urlset>"
+    return Response(body, mimetype="application/xml")
 
 
 @app.route("/dashboard")
