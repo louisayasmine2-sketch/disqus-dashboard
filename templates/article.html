@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Test Article</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Article</p>
+                <h1>Test Discussion Page</h1>
+            </div>
+        </header>
+
+        <article class="post-card">
+            <p>This is a test article for Disqus comments.</p>
+        </article>
+
+        <section class="post-card">
+            <div id="disqus_thread"></div>
+        </section>
+
+        <script>
+            var disqus_config = function () {
+                this.page.url = "https://disqus-dashboard.onrender.com/article";
+                this.page.identifier = "test-article-001";
+                this.page.title = "Test Discussion Page";
+            };
+
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://{{ disqus_forum }}.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the comments.</noscript>
+    </main>
+</body>
+</html>
