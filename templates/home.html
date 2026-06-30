@@ -21,7 +21,10 @@
             <p class="eyebrow">AI tools and automation</p>
             <h1>Build smarter workflows with practical AI agents.</h1>
             <p>Guides, templates, and discussions for small teams that want to use AI to publish faster, automate routine work, and grow with less chaos.</p>
-            <a class="button" href="{{ url_for('articles') }}">Explore Articles</a>
+            <div class="hero-actions">
+                <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=hero&utm_campaign=tool_finder">Find your AI tools</a>
+                <a class="button button-secondary" href="{{ url_for('articles') }}">Explore Articles</a>
+            </div>
         </div>
     </header>
 
@@ -40,6 +43,15 @@
                     <span>{{ article.read_time }} | Updated {{ article.updated }}</span>
                 </article>
             {% endfor %}
+        </section>
+
+        <section class="site-cta">
+            <div>
+                <p class="eyebrow">Free tool finder</p>
+                <h2>Not sure which AI tools fit your workflow?</h2>
+                <p>Answer a short quiz and get a focused 3-tool stack for your business size, budget, and use case.</p>
+            </div>
+            <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=home_cta&utm_campaign=tool_finder">Start the quiz</a>
         </section>
     </main>
     {% include "_footer.html" %}
