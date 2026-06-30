@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Operator Hub</title>
     <meta name="description" content="Practical AI tools, automation workflows, and operator guides for small business teams.">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="AI Operator Hub">
+    <meta property="og:description" content="Practical AI tools, automation workflows, and operator guides for small business teams.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
 </head>
 <body>
     <nav class="site-nav">
