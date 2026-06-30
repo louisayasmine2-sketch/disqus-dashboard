@@ -37,11 +37,10 @@
                     <p class="tag">{{ article.category }}</p>
                     <h3><a href="{{ url_for('article_detail', slug=article.slug) }}">{{ article.title }}</a></h3>
                     <p>{{ article.summary }}</p>
-                    <span>{{ article.read_time }}</span>
+                    <span>{{ article.read_time }} | Updated {{ article.updated }}</span>
                 </article>
             {% endfor %}
         </section>
     </main>
 </body>
 </html>
-
