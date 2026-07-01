@@ -427,6 +427,43 @@ a:hover {
     padding: 0 18px;
 }
 
+.admin-filter-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    align-items: end;
+    margin-bottom: 18px;
+}
+
+.admin-filter-form label {
+    display: grid;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.admin-filter-form input {
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 12px;
+    color: var(--navy);
+    font: inherit;
+}
+
+.admin-filter-form button,
+.admin-filter-form .text-link {
+    margin-top: auto;
+}
+
+.admin-filter-form .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+}
+
 .page-header,
 .section-heading {
     display: flex;
@@ -722,6 +759,14 @@ h2 {
     margin: 0;
     color: #334155;
     line-height: 1.7;
+}
+
+.site-cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .lead-capture {
@@ -1199,6 +1244,18 @@ h2 {
 
     .tools-grid {
         grid-template-columns: 1fr;
+    }
+
+    .admin-filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .site-cta-actions {
+        width: 100%;
+    }
+
+    .site-cta-actions .button {
+        width: 100%;
     }
 
     .subscribe-form div {

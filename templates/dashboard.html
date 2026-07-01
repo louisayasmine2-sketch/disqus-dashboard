@@ -38,6 +38,28 @@
                 </div>
                 <span class="count">{{ contact_requests|length }} requests</span>
             </div>
+            <form class="admin-filter-form" method="get" action="{{ url_for('dashboard') }}">
+                <label>
+                    Source:
+                    <input
+                        type="text"
+                        name="source"
+                        value="{{ source_filter }}"
+                        placeholder="pricing_card, workflows_cta, nav, footer..."
+                    >
+                </label>
+                <label>
+                    Workflow:
+                    <input
+                        type="text"
+                        name="workflow"
+                        value="{{ workflow_filter }}"
+                        placeholder="Workflow Library, Operator Setup, Tool Finder..."
+                    >
+                </label>
+                <button class="button button-secondary-dark" type="submit">Filter</button>
+                <a class="text-link" href="{{ url_for('dashboard') }}">Reset</a>
+            </form>
 
             {% if contact_requests %}
                 <div class="subscriber-table">
@@ -49,6 +71,7 @@
                                 <th>Email</th>
                                 <th>Company</th>
                                 <th>Workflow</th>
+                                <th>Source</th>
                                 <th>Message</th>
                             </tr>
                         </thead>
@@ -60,6 +83,7 @@
                                     <td>{{ request.email }}</td>
                                     <td>{{ request.company or "-" }}</td>
                                     <td>{{ request.workflow or "-" }}</td>
+                                    <td>{{ request.source or "-" }}</td>
                                     <td>{{ request.message }}</td>
                                 </tr>
                             {% endfor %}

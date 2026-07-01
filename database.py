@@ -59,11 +59,15 @@ def init_db():
             email TEXT NOT NULL,
             company TEXT,
             workflow TEXT,
+            source TEXT,
             message TEXT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
         """
     )
+    columns = [row[1] for row in db.execute("PRAGMA table_info(contact_requests)").fetchall()]
+    if "source" not in columns:
+        db.execute("ALTER TABLE contact_requests ADD COLUMN source TEXT")
     db.commit()
 
 
@@ -147,36 +151,43 @@ def get_subscribers(limit=100):
     return [dict(row) for row in rows]
 
 
-def save_contact_request(name, email, company, workflow, message):
+def save_contact_request(name, email, company, workflow, source, message):
     db = get_db()
     db.execute(
         """
-        INSERT INTO contact_requests (name, email, company, workflow, message, created_at)
-        VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+        INSERT INTO contact_requests (name, email, company, workflow, source, message, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
         """,
         (
             name.strip(),
             email.strip().lower(),
             company.strip(),
             workflow.strip(),
+            (source or "").strip(),
             message.strip(),
         ),
     )
     db.commit()
 
 
-def get_contact_requests(limit=100):
-    rows = (
-        get_db()
-        .execute(
-            """
-            SELECT id, name, email, company, workflow, message, created_at
-            FROM contact_requests
-            ORDER BY created_at DESC
-            LIMIT ?
-            """,
-            (limit,),
-        )
-        .fetchall()
-    )
+def get_contact_requests(limit=100, workflow=None, source=None):
+    base_sql = "SELECT id, name, email, company, workflow, source, message, created_at FROM contact_requests"
+    filters = []
+    params = []
+
+    if workflow:
+        filters.append("workflow = ?")
+        params.append(workflow.strip())
+
+    if source:
+        filters.append("source = ?")
+        params.append(source.strip())
+
+    if filters:
+        base_sql += " WHERE " + " AND ".join(filters)
+
+    base_sql += " ORDER BY created_at DESC LIMIT ?"
+    params.append(limit)
+
+    rows = get_db().execute(base_sql, params).fetchall()
     return [dict(row) for row in rows]

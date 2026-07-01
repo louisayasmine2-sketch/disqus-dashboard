@@ -61,7 +61,10 @@
                 <h2>Match your workflow with the right AI tools.</h2>
                 <p>The free finder gives you a short practical tool stack based on team size, budget, and use case.</p>
             </div>
-            <a class="button button-primary" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=workflows&utm_campaign=tool_finder">Find your tools</a>
+            <div class="site-cta-actions">
+                <a class="button button-primary" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=workflows&utm_campaign=tool_finder">Find your tools</a>
+                <a class="button button-secondary-dark" href="{{ url_for('contact', workflow='Email Workflows', source='workflows_cta') }}">Get setup help</a>
+            </div>
         </section>
     </main>
     {% include "_footer.html" %}

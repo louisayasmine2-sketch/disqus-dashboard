@@ -44,7 +44,7 @@
                     <li>Follow-up playbooks</li>
                     <li>Approval checklists</li>
                 </ul>
-                <a class="button button-secondary-dark" href="{{ url_for('contact') }}">Request access</a>
+                <a class="button button-secondary-dark" href="{{ url_for('contact', workflow='Workflow Library', source='pricing_card') }}">Request access</a>
             </article>
             <article class="pricing-card">
                 <p class="tag">Teams</p>
@@ -55,7 +55,7 @@
                     <li>Tool stack recommendations</li>
                     <li>Small team operating system review</li>
                 </ul>
-                <a class="button button-secondary-dark" href="{{ url_for('contact') }}">Contact us</a>
+                <a class="button button-secondary-dark" href="{{ url_for('contact', workflow='Operator Setup', source='pricing_card') }}">Contact us</a>
             </article>
         </section>
     </main>

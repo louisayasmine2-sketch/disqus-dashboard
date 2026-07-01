@@ -27,6 +27,7 @@
                 <div class="notice">Please add your name, email, and message before sending.</div>
             {% endif %}
             <form class="contact-form" method="post">
+                <input type="hidden" name="source" value="{{ source or 'contact_page' }}">
                 <div class="form-grid">
                     <label>
                         Name
@@ -45,12 +46,16 @@
                     <label>
                         Workflow type
                         <select name="workflow">
-                            <option value="Email campaigns">Email campaigns</option>
-                            <option value="Follow-up system">Follow-up system</option>
-                            <option value="Contact list workflow">Contact list workflow</option>
-                            <option value="Approval process">Approval process</option>
-                            <option value="Tool recommendation">Tool recommendation</option>
-                            <option value="Partnership">Partnership</option>
+                            <option value="" {% if not selected_workflow %}selected{% endif %}>Select a workflow</option>
+                            <option value="Tool Finder" {% if selected_workflow == 'Tool Finder' %}selected{% endif %}>Tool Finder</option>
+                            <option value="Workflow Library" {% if selected_workflow == 'Workflow Library' %}selected{% endif %}>Workflow Library</option>
+                            <option value="Operator Setup" {% if selected_workflow == 'Operator Setup' %}selected{% endif %}>Operator Setup</option>
+                            <option value="Email campaigns" {% if selected_workflow == 'Email campaigns' %}selected{% endif %}>Email campaigns</option>
+                            <option value="Follow-up system" {% if selected_workflow == 'Follow-up system' %}selected{% endif %}>Follow-up system</option>
+                            <option value="Contact list workflow" {% if selected_workflow == 'Contact list workflow' %}selected{% endif %}>Contact list workflow</option>
+                            <option value="Approval process" {% if selected_workflow == 'Approval process' %}selected{% endif %}>Approval process</option>
+                            <option value="Tool recommendation" {% if selected_workflow == 'Tool recommendation' %}selected{% endif %}>Tool recommendation</option>
+                            <option value="Partnership" {% if selected_workflow == 'Partnership' %}selected{% endif %}>Partnership</option>
                         </select>
                     </label>
                 </div>

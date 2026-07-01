@@ -155,6 +155,8 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     status = request.args.get("status")
+    selected_workflow = request.args.get("workflow", "").strip()
+    source = request.args.get("source", "").strip()
 
     if request.method == "POST":
         name = request.form.get("name", "").strip()
@@ -162,15 +164,22 @@ def contact():
         company = request.form.get("company", "").strip()
         workflow = request.form.get("workflow", "").strip()
         message = request.form.get("message", "").strip()
+        source = request.form.get("source", "").strip() or source or "contact_page"
 
         if name and "@" in email and "." in email and message:
-            save_contact_request(name, email, company, workflow, message)
-            save_subscriber(email, "contact-request")
-            return redirect(url_for("contact", status="sent"))
+            save_contact_request(name, email, company, workflow, source, message)
+            save_subscriber(email, source)
+            return redirect(url_for("contact", status="sent", workflow=workflow, source=source))
 
-        return redirect(url_for("contact", status="error"))
+        return redirect(url_for("contact", status="error", workflow=workflow, source=source))
 
-    return render_template("contact.html", canonical_url=absolute_url("contact"), status=status)
+    return render_template(
+        "contact.html",
+        canonical_url=absolute_url("contact"),
+        status=status,
+        selected_workflow=selected_workflow,
+        source=source,
+    )
 
 
 @app.route("/privacy-policy")
@@ -299,7 +308,9 @@ def sitemap_xml():
 def dashboard():
     error = None
     subscribers = get_subscribers()
-    contact_requests = get_contact_requests()
+    source_filter = request.args.get("source", "").strip()
+    workflow_filter = request.args.get("workflow", "").strip()
+    contact_requests = get_contact_requests(source=source_filter or None, workflow=workflow_filter or None)
 
     try:
         threads = client.get_threads()
@@ -313,6 +324,8 @@ def dashboard():
         threads=threads,
         subscribers=subscribers,
         contact_requests=contact_requests,
+        source_filter=source_filter,
+        workflow_filter=workflow_filter,
         error=error,
     )
 
