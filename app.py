@@ -6,7 +6,17 @@ from functools import wraps
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, Response, abort, redirect, render_template, request, session, url_for
+from flask import (
+    Flask,
+    Response,
+    abort,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+    session,
+    url_for,
+)
 
 from database import close_db, get_cached_posts, get_cached_threads, get_contact_requests, get_subscribers, init_db, save_contact_request, save_posts, save_subscriber, save_threads
 from disqus_client import DisqusClient, DisqusClientError
@@ -19,6 +29,8 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key")
 app.teardown_appcontext(close_db)
 
+PROJECT_ROOT = Path(__file__).resolve().parent
+PUBLIC_DIR = PROJECT_ROOT / "public"
 
 client = DisqusClient(
     api_key=os.getenv("DISQUS_API_KEY", ""),
@@ -91,6 +103,11 @@ def inject_site_settings():
         "google_analytics_id": os.getenv("GOOGLE_ANALYTICS_ID", "").strip(),
         "tool_finder_url": os.getenv("TOOL_FINDER_URL", "https://ai-tool-finder-web.onrender.com").strip(),
     }
+
+
+@app.route("/public/<path:filename>")
+def public_file(filename):
+    return send_from_directory(PUBLIC_DIR, filename)
 
 
 @app.before_request

@@ -1,5 +1,7 @@
 <nav class="site-nav">
-    <a class="brand" href="{{ url_for('home') }}">DevelobMail</a>
+    <a class="brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('public_file', filename='assets/brand/develobmail-logo.png') }}" alt="DevelobMail" class="brand-logo">
+    </a>
     <div>
         <a href="{{ url_for('workflows') }}">Workflows</a>
         <a href="{{ url_for('tools') }}">Email Tools</a>
