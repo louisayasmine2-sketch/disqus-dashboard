@@ -1,10 +1,12 @@
 import json
+import hmac
 import os
 from datetime import datetime
+from functools import wraps
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, Response, abort, redirect, render_template, request, url_for
+from flask import Flask, Response, abort, redirect, render_template, request, session, url_for
 
 from database import close_db, get_cached_posts, get_cached_threads, get_subscribers, init_db, save_posts, save_subscriber, save_threads
 from disqus_client import DisqusClient, DisqusClientError
@@ -52,6 +54,21 @@ def get_site_url():
 def absolute_url(endpoint, **values):
     path = url_for(endpoint, **values)
     return f"{get_site_url()}{path}"
+
+
+def get_admin_password():
+    return os.getenv("ADMIN_PASSWORD", "").strip()
+
+
+def admin_required(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        if session.get("admin_authenticated"):
+            return view(*args, **kwargs)
+
+        return redirect(url_for("login", next=request.path))
+
+    return wrapped_view
 
 
 def sitemap_date(value):
@@ -160,9 +177,32 @@ def affiliate_disclosure():
     return render_template("affiliate_disclosure.html", canonical_url=absolute_url("affiliate_disclosure"))
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html", canonical_url=absolute_url("login"))
+    error = None
+    admin_password = get_admin_password()
+
+    if request.method == "POST":
+        password = request.form.get("password", "")
+        if admin_password and hmac.compare_digest(password, admin_password):
+            session["admin_authenticated"] = True
+            next_url = request.args.get("next") or url_for("dashboard")
+            if not next_url.startswith("/"):
+                next_url = url_for("dashboard")
+            return redirect(next_url)
+
+        if admin_password:
+            error = "The password is incorrect."
+        else:
+            error = "Admin password is not configured yet."
+
+    return render_template("login.html", canonical_url=absolute_url("login"), error=error)
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.pop("admin_authenticated", None)
+    return redirect(url_for("login"))
 
 
 @app.route("/article")
@@ -239,6 +279,7 @@ def sitemap_xml():
 
 
 @app.route("/dashboard")
+@admin_required
 def dashboard():
     error = None
     subscribers = get_subscribers()
@@ -254,6 +295,7 @@ def dashboard():
 
 
 @app.route("/thread/<thread_id>")
+@admin_required
 def thread_detail(thread_id):
     error = None
     thread = None

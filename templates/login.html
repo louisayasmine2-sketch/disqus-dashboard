@@ -16,8 +16,16 @@
         <section class="content-shell login-shell">
             <p class="eyebrow">Internal access</p>
             <h1>Admin dashboard</h1>
-            <p>The dashboard is for the site owner to review Disqus activity and email subscribers. Keep this link private until authentication is added.</p>
-            <a class="button button-primary" href="{{ url_for('dashboard') }}">Continue to dashboard</a>
+            <p>The dashboard is for the site owner to review Disqus activity and email subscribers.</p>
+            {% if error %}
+                <div class="notice">{{ error }}</div>
+            {% endif %}
+            <form class="login-form" method="post">
+                <label for="password">Admin password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+                <button class="button button-primary" type="submit">Sign in</button>
+            </form>
+            <p class="form-note">Set the password in Render using the <strong>ADMIN_PASSWORD</strong> environment variable.</p>
         </section>
     </main>
     {% include "_footer.html" %}

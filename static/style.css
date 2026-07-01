@@ -383,6 +383,50 @@ a:hover {
     margin-top: 10px;
 }
 
+.login-form {
+    display: grid;
+    gap: 12px;
+    max-width: 420px;
+    margin-top: 24px;
+}
+
+.login-form label {
+    color: var(--navy);
+    font-weight: 700;
+}
+
+.login-form input {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 14px;
+    color: var(--navy);
+    font: inherit;
+}
+
+.login-form input:focus {
+    border-color: var(--accent);
+    outline: 3px solid rgba(15, 118, 110, 0.16);
+}
+
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.admin-actions form {
+    margin: 0;
+}
+
+.admin-actions .button {
+    min-height: 42px;
+    padding: 0 18px;
+}
+
 .page-header,
 .section-heading {
     display: flex;

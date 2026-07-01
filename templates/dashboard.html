@@ -16,7 +16,12 @@
                 <p class="eyebrow">Admin</p>
                 <h1>Disqus thread dashboard</h1>
             </div>
-            <span class="count">{{ threads|length }} threads</span>
+            <div class="admin-actions">
+                <span class="count">{{ threads|length }} threads</span>
+                <form method="post" action="{{ url_for('logout') }}">
+                    <button class="button button-secondary-dark" type="submit">Sign out</button>
+                </form>
+            </div>
         </header>
 
         {% if error %}
