@@ -105,6 +105,23 @@ def inject_site_settings():
     }
 
 
+@app.before_request
+def enforce_canonical_domain():
+    canonical_host = os.getenv("CANONICAL_DOMAIN", "").strip().lower().strip()
+    if not canonical_host:
+        return None
+
+    host = (request.host or "").split(":")[0].lower()
+    if not host or host in {"localhost", "127.0.0.1", "::1"}:
+        return None
+
+    if host != canonical_host:
+        target = request.url.replace(f"//{request.host}", f"//{canonical_host}", 1)
+        return redirect(target, code=301)
+
+    return None
+
+
 @app.route("/public/<path:filename>")
 def public_file(filename):
     return send_from_directory(PUBLIC_DIR, filename)
