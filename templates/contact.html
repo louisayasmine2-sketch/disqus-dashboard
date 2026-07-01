@@ -20,7 +20,46 @@
         <section class="content-shell">
             <p class="eyebrow">Contact</p>
             <h1>Contact DevelobMail</h1>
-            <p>For feedback, corrections, partnerships, sponsorships, or affiliate inquiries, contact us by email.</p>
+            <p>Tell us what email workflow you want to improve. We review requests for workflow setup, partnerships, sponsorships, and affiliate inquiries.</p>
+            {% if status == "sent" %}
+                <div class="notice notice-success">Thanks. Your request has been received.</div>
+            {% elif status == "error" %}
+                <div class="notice">Please add your name, email, and message before sending.</div>
+            {% endif %}
+            <form class="contact-form" method="post">
+                <div class="form-grid">
+                    <label>
+                        Name
+                        <input name="name" type="text" autocomplete="name" required>
+                    </label>
+                    <label>
+                        Email
+                        <input name="email" type="email" autocomplete="email" required>
+                    </label>
+                </div>
+                <div class="form-grid">
+                    <label>
+                        Company
+                        <input name="company" type="text" autocomplete="organization">
+                    </label>
+                    <label>
+                        Workflow type
+                        <select name="workflow">
+                            <option value="Email campaigns">Email campaigns</option>
+                            <option value="Follow-up system">Follow-up system</option>
+                            <option value="Contact list workflow">Contact list workflow</option>
+                            <option value="Approval process">Approval process</option>
+                            <option value="Tool recommendation">Tool recommendation</option>
+                            <option value="Partnership">Partnership</option>
+                        </select>
+                    </label>
+                </div>
+                <label>
+                    What do you need help with?
+                    <textarea name="message" rows="6" required placeholder="Example: We need a simple approval flow for weekly email campaigns and follow-up reminders."></textarea>
+                </label>
+                <button class="button button-primary" type="submit">Send request</button>
+            </form>
             <div class="contact-card">
                 <span>Email</span>
                 <a href="mailto:hello@develobmail.com">hello@develobmail.com</a>

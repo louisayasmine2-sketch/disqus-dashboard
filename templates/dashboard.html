@@ -33,6 +33,50 @@
         <section class="subscriber-panel">
             <div class="section-heading">
                 <div>
+                    <p class="eyebrow">Pipeline</p>
+                    <h2>Workflow requests</h2>
+                </div>
+                <span class="count">{{ contact_requests|length }} requests</span>
+            </div>
+
+            {% if contact_requests %}
+                <div class="subscriber-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Workflow</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for request in contact_requests %}
+                                <tr>
+                                    <td>{{ request.created_at }}</td>
+                                    <td>{{ request.name }}</td>
+                                    <td>{{ request.email }}</td>
+                                    <td>{{ request.company or "-" }}</td>
+                                    <td>{{ request.workflow or "-" }}</td>
+                                    <td>{{ request.message }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <h2>No workflow requests yet</h2>
+                    <p>When visitors submit the contact form, their request will appear here.</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="subscriber-panel">
+            <div class="section-heading">
+                <div>
                     <p class="eyebrow">Growth</p>
                     <h2>Newsletter subscribers</h2>
                 </div>

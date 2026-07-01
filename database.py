@@ -51,6 +51,19 @@ def init_db():
         )
         """
     )
+    db.execute(
+        """
+        CREATE TABLE IF NOT EXISTS contact_requests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            company TEXT,
+            workflow TEXT,
+            message TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+        """
+    )
     db.commit()
 
 
@@ -124,6 +137,41 @@ def get_subscribers(limit=100):
             """
             SELECT email, source, created_at
             FROM newsletter_subscribers
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+        .fetchall()
+    )
+    return [dict(row) for row in rows]
+
+
+def save_contact_request(name, email, company, workflow, message):
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO contact_requests (name, email, company, workflow, message, created_at)
+        VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+        """,
+        (
+            name.strip(),
+            email.strip().lower(),
+            company.strip(),
+            workflow.strip(),
+            message.strip(),
+        ),
+    )
+    db.commit()
+
+
+def get_contact_requests(limit=100):
+    rows = (
+        get_db()
+        .execute(
+            """
+            SELECT id, name, email, company, workflow, message, created_at
+            FROM contact_requests
             ORDER BY created_at DESC
             LIMIT ?
             """,

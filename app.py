@@ -8,7 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, Response, abort, redirect, render_template, request, session, url_for
 
-from database import close_db, get_cached_posts, get_cached_threads, get_subscribers, init_db, save_posts, save_subscriber, save_threads
+from database import close_db, get_cached_posts, get_cached_threads, get_contact_requests, get_subscribers, init_db, save_contact_request, save_posts, save_subscriber, save_threads
 from disqus_client import DisqusClient, DisqusClientError
 
 
@@ -152,9 +152,25 @@ def about():
     return render_template("about.html", canonical_url=absolute_url("about"))
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html", canonical_url=absolute_url("contact"))
+    status = request.args.get("status")
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        company = request.form.get("company", "").strip()
+        workflow = request.form.get("workflow", "").strip()
+        message = request.form.get("message", "").strip()
+
+        if name and "@" in email and "." in email and message:
+            save_contact_request(name, email, company, workflow, message)
+            save_subscriber(email, "contact-request")
+            return redirect(url_for("contact", status="sent"))
+
+        return redirect(url_for("contact", status="error"))
+
+    return render_template("contact.html", canonical_url=absolute_url("contact"), status=status)
 
 
 @app.route("/privacy-policy")
@@ -283,6 +299,7 @@ def sitemap_xml():
 def dashboard():
     error = None
     subscribers = get_subscribers()
+    contact_requests = get_contact_requests()
 
     try:
         threads = client.get_threads()
@@ -291,7 +308,13 @@ def dashboard():
         error = str(exc)
         threads = get_cached_threads()
 
-    return render_template("dashboard.html", threads=threads, subscribers=subscribers, error=error)
+    return render_template(
+        "dashboard.html",
+        threads=threads,
+        subscribers=subscribers,
+        contact_requests=contact_requests,
+        error=error,
+    )
 
 
 @app.route("/thread/<thread_id>")
