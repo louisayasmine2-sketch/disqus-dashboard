@@ -716,6 +716,29 @@ h2 {
     line-height: 1.8;
 }
 
+.inline-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border: 1px solid #b6ddd7;
+    border-radius: 8px;
+    background: #effaf8;
+    margin: 28px 0;
+    padding: 22px;
+}
+
+.inline-cta h2 {
+    margin: 0 0 8px;
+    font-size: 1.35rem;
+}
+
+.inline-cta p:not(.eyebrow) {
+    margin: 0;
+    color: #2f3a4a;
+    line-height: 1.7;
+}
+
 .article-extra {
     border-top: 1px solid var(--line);
     margin-top: 28px;
@@ -879,6 +902,7 @@ h2 {
     .article-row,
     .directory-intro,
     .site-cta,
+    .inline-cta,
     .post-card header {
         align-items: flex-start;
         grid-template-columns: 1fr;

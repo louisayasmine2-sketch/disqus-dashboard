@@ -32,6 +32,16 @@
             <div class="article-body">
                 {% for paragraph in article.body %}
                     <p>{{ paragraph }}</p>
+                    {% if loop.index == 3 %}
+                        <aside class="inline-cta">
+                            <div>
+                                <p class="eyebrow">Free tool finder</p>
+                                <h2>Not sure which AI tools fit your workflow?</h2>
+                                <p>Answer a few quick questions and get a short, practical AI tool stack for your business.</p>
+                            </div>
+                            <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=article_inline_cta&utm_campaign=tool_finder&utm_content={{ article.slug }}">Find your AI tools</a>
+                        </aside>
+                    {% endif %}
                 {% endfor %}
             </div>
 
