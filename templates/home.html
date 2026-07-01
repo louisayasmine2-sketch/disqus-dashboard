@@ -107,6 +107,29 @@
             </div>
             <a class="button button-primary" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=home_cta&utm_campaign=tool_finder" data-testid="cta-start-quiz">Start the quiz</a>
         </section>
+
+        <section class="lead-capture" data-testid="lead-capture">
+            <div>
+                <p class="eyebrow">Free checklist</p>
+                <h2>Get the AI workflow checklist for small teams.</h2>
+                <p>Join the early list for practical workflow templates, AI tool notes, and update alerts from AI Operator Hub.</p>
+            </div>
+            <form class="subscribe-form" action="{{ url_for('subscribe') }}" method="post">
+                <input type="hidden" name="source" value="homepage_checklist">
+                <label for="subscriber-email">Email address</label>
+                <div>
+                    <input id="subscriber-email" name="email" type="email" placeholder="you@example.com" required>
+                    <button class="button button-primary" type="submit">Get updates</button>
+                </div>
+                {% if request.args.get("subscribed") == "1" %}
+                    <p class="form-note">You're on the list. We'll send practical AI workflow updates.</p>
+                {% elif request.args.get("subscribed") == "0" %}
+                    <p class="form-note form-note-error">Please enter a valid email address.</p>
+                {% else %}
+                    <p class="form-note">No spam. Just useful AI workflow ideas and tool updates.</p>
+                {% endif %}
+            </form>
+        </section>
     </main>
     {% include "_footer.html" %}
 </body>

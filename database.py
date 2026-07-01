@@ -42,6 +42,15 @@ def init_db():
         )
         """
     )
+    db.execute(
+        """
+        CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+            email TEXT PRIMARY KEY,
+            source TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+        """
+    )
     db.commit()
 
 
@@ -92,3 +101,17 @@ def get_cached_posts(thread_id):
         .fetchall()
     )
     return [json.loads(row["data"]) for row in rows]
+
+
+def save_subscriber(email, source):
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO newsletter_subscribers (email, source, created_at)
+        VALUES (?, ?, CURRENT_TIMESTAMP)
+        ON CONFLICT(email) DO UPDATE SET
+            source = excluded.source
+        """,
+        (email.strip().lower(), source.strip()),
+    )
+    db.commit()

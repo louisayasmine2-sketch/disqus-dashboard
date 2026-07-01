@@ -6,7 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, Response, abort, redirect, render_template, request, url_for
 
-from database import close_db, get_cached_posts, get_cached_threads, init_db, save_posts, save_threads
+from database import close_db, get_cached_posts, get_cached_threads, init_db, save_posts, save_subscriber, save_threads
 from disqus_client import DisqusClient, DisqusClientError
 
 
@@ -101,6 +101,18 @@ def articles():
 @app.route("/tools")
 def tools():
     return render_template("tools.html", tools=TOOLS, canonical_url=absolute_url("tools"))
+
+
+@app.route("/subscribe", methods=["POST"])
+def subscribe():
+    email = request.form.get("email", "").strip()
+    source = request.form.get("source", "homepage").strip()
+
+    if "@" in email and "." in email:
+        save_subscriber(email, source)
+        return redirect(url_for("home", subscribed="1"))
+
+    return redirect(url_for("home", subscribed="0"))
 
 
 @app.route("/about")

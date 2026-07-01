@@ -569,6 +569,70 @@ h2 {
     line-height: 1.7;
 }
 
+.lead-capture {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+    gap: 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--panel);
+    margin-top: 24px;
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: var(--shadow-sm);
+}
+
+.lead-capture h2 {
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+
+.lead-capture p:not(.eyebrow) {
+    max-width: 640px;
+    margin: 0;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.subscribe-form {
+    display: grid;
+    gap: 10px;
+}
+
+.subscribe-form label {
+    color: var(--navy);
+    font-weight: 700;
+}
+
+.subscribe-form div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+}
+
+.subscribe-form input {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 14px;
+    color: var(--navy);
+    font: inherit;
+}
+
+.subscribe-form input:focus {
+    border-color: var(--accent);
+    outline: 3px solid rgba(15, 118, 110, 0.16);
+}
+
+.form-note {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.form-note-error {
+    color: #991b1b;
+}
+
 .tools-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -902,6 +966,7 @@ h2 {
     .article-row,
     .directory-intro,
     .site-cta,
+    .lead-capture,
     .inline-cta,
     .post-card header {
         align-items: flex-start;
@@ -925,6 +990,10 @@ h2 {
     }
 
     .tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .subscribe-form div {
         grid-template-columns: 1fr;
     }
 
