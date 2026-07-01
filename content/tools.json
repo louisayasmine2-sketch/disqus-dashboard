@@ -1,0 +1,82 @@
+[
+  {
+    "name": "ChatGPT",
+    "category": "AI Writing",
+    "use_case": "Draft articles, summarize research, brainstorm outlines, and create reusable content workflows.",
+    "best_for": "Content teams, creators, operators, and small business owners.",
+    "free_plan": "Available",
+    "pricing_note": "Paid plans may unlock higher limits and advanced features.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Claude",
+    "category": "AI Writing",
+    "use_case": "Long-form writing, document analysis, editorial review, and content improvement.",
+    "best_for": "Writers, analysts, researchers, and editorial workflows.",
+    "free_plan": "Available",
+    "pricing_note": "Paid plans may offer higher usage limits.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Zapier",
+    "category": "Automation",
+    "use_case": "Connect apps, automate lead routing, send alerts, and build no-code business workflows.",
+    "best_for": "Small teams that need quick app-to-app automation.",
+    "free_plan": "Available",
+    "pricing_note": "Pricing often depends on tasks, apps, and advanced workflow needs.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Make",
+    "category": "Automation",
+    "use_case": "Build visual automation scenarios for operations, content systems, and reporting workflows.",
+    "best_for": "Operators who want flexible workflow logic and visual scenario building.",
+    "free_plan": "Available",
+    "pricing_note": "Pricing often depends on operations and scenario usage.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Notion AI",
+    "category": "Productivity",
+    "use_case": "Organize notes, create knowledge bases, summarize docs, and manage internal content systems.",
+    "best_for": "Teams that already use Notion for documentation and planning.",
+    "free_plan": "Limited",
+    "pricing_note": "AI features may require an add-on or paid workspace plan.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Perplexity",
+    "category": "Research",
+    "use_case": "Research topics, compare sources, summarize web information, and prepare article briefs.",
+    "best_for": "Researchers, writers, and operators who need faster topic discovery.",
+    "free_plan": "Available",
+    "pricing_note": "Paid plans may add advanced search and higher usage limits.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Surfer SEO",
+    "category": "SEO",
+    "use_case": "Optimize article structure, content depth, keyword coverage, and on-page SEO recommendations.",
+    "best_for": "Content sites that want SEO-focused writing workflows.",
+    "free_plan": "No",
+    "pricing_note": "Paid plans are typically based on content volume and features.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  },
+  {
+    "name": "Intercom",
+    "category": "Customer Support",
+    "use_case": "Manage customer support conversations, automate replies, and route users to helpful answers.",
+    "best_for": "SaaS, service businesses, and teams with active customer support needs.",
+    "free_plan": "Trial may be available",
+    "pricing_note": "Pricing can vary by seats, usage, and support features.",
+    "affiliate_url": "#",
+    "review_status": "Research pending"
+  }
+]

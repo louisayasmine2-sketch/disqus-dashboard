@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Disqus Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% include "_nav.html" %}
+
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Admin</p>
+                <h1>Disqus thread dashboard</h1>
+            </div>
+            <span class="count">{{ threads|length }} threads</span>
+        </header>
+
+        {% if error %}
+            <section class="notice">
+                {{ error }} Showing cached data if available.
+            </section>
+        {% endif %}
+
+        <section class="thread-list">
+            {% if threads %}
+                {% for thread in threads %}
+                    <article class="thread-card">
+                        <div>
+                            <h2>
+                                <a href="{{ url_for('thread_detail', thread_id=thread.id) }}">
+                                    {{ thread.title }}
+                                </a>
+                            </h2>
+                            {% if thread.link %}
+                                <a class="external-link" href="{{ thread.link }}" target="_blank" rel="noreferrer">
+                                    Open original thread
+                                </a>
+                            {% endif %}
+                        </div>
+                        <dl class="stats">
+                            <div>
+                                <dt>Posts</dt>
+                                <dd>{{ thread.posts }}</dd>
+                            </div>
+                            <div>
+                                <dt>Likes</dt>
+                                <dd>{{ thread.likes }}</dd>
+                            </div>
+                        </dl>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <h2>No threads yet</h2>
+                    <p>Publish a comment on one of the article pages, then refresh this dashboard.</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Affiliate Disclosure - AI Operator Hub</title>
+    <meta name="description" content="Affiliate disclosure for AI Operator Hub recommendations, tool reviews, and monetized links.">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="Affiliate Disclosure - AI Operator Hub">
+    <meta property="og:description" content="How AI Operator Hub may earn commissions from affiliate links and sponsored recommendations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
+</head>
+<body>
+    {% include "_nav.html" %}
+
+    <main class="content-page">
+        <section class="content-shell">
+            <p class="eyebrow">Disclosure</p>
+            <h1>Affiliate Disclosure</h1>
+            <p>AI Operator Hub may earn commissions from affiliate links, sponsored placements, or partner offers included on this website.</p>
+            <p>When we recommend an AI tool, automation platform, or related product, we aim to explain who it is useful for, what tradeoffs to consider, and how it fits into a practical workflow.</p>
+            <p>Affiliate compensation does not require readers to pay extra. It helps support the publication and the ongoing testing of tools and workflows.</p>
+            <p>We encourage readers to evaluate tools based on their own needs, budget, privacy requirements, and business goals before purchasing.</p>
+        </section>
+    </main>
+
+    {% include "_footer.html" %}
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ article.title }} - AI Operator Hub</title>
+    <meta name="description" content="{{ article.meta_description or article.summary }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="{{ article.title }}">
+    <meta property="og:description" content="{{ article.meta_description or article.summary }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta name="keywords" content="{{ article.keyword }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
+</head>
+<body>
+    {% include "_nav.html" %}
+
+    <main class="article-page">
+        <article class="article-shell">
+            <a class="back-link" href="{{ url_for('articles') }}">Back to articles</a>
+            <p class="tag">{{ article.category }}</p>
+            <h1>{{ article.title }}</h1>
+            <p class="article-summary">{{ article.summary }}</p>
+            <div class="article-meta">
+                <span>{{ article.published }}</span>
+                <span>Updated {{ article.updated }}</span>
+                <span>{{ article.read_time }}</span>
+            </div>
+
+            <div class="article-body">
+                {% for paragraph in article.body %}
+                    <p>{{ paragraph }}</p>
+                {% endfor %}
+            </div>
+
+            {% if article.recommended_tools %}
+                <section class="article-extra">
+                    <h2>Recommended tool stack</h2>
+                    <div class="tool-table">
+                        <div class="tool-row tool-head">
+                            <span>Use case</span>
+                            <span>What to look for</span>
+                            <span>Best for</span>
+                        </div>
+                        {% for tool in article.recommended_tools %}
+                            <div class="tool-row">
+                                <span>{{ tool.use_case }}</span>
+                                <span>{{ tool.criteria }}</span>
+                                <span>{{ tool.best_for }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+            <section class="article-extra">
+                <h2>Monetization angle</h2>
+                <p>{{ article.affiliate_angle }}</p>
+            </section>
+
+            {% if article.cta %}
+                <section class="article-extra cta-panel">
+                    <h2>{{ article.cta.title }}</h2>
+                    <p>{{ article.cta.body }}</p>
+                    <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=article_cta&utm_campaign=tool_finder&utm_content={{ article.slug }}">Find your AI tools</a>
+                </section>
+            {% endif %}
+
+            {% if article.related %}
+                <section class="article-extra">
+                    <h2>Related guides</h2>
+                    <ul class="related-list">
+                        {% for item in article.related %}
+                            <li><a href="{{ url_for('article_detail', slug=item.slug) }}">{{ item.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endif %}
+
+            <section class="article-extra">
+                <h2>FAQ</h2>
+                {% for item in article.faq %}
+                    <details>
+                        <summary>{{ item.question }}</summary>
+                        <p>{{ item.answer }}</p>
+                    </details>
+                {% endfor %}
+            </section>
+        </article>
+
+        <section class="comment-section">
+            <h2>Join the discussion</h2>
+            <div id="disqus_thread"></div>
+        </section>
+
+        <script>
+            var disqus_config = function () {
+                this.page.url = "{{ canonical_url }}";
+                this.page.identifier = "{{ article.slug }}";
+                this.page.title = "{{ article.title }}";
+            };
+
+            (function() {
+                var d = document, s = d.createElement("script");
+                s.src = "https://{{ disqus_forum }}.disqus.com/embed.js";
+                s.setAttribute("data-timestamp", +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the comments.</noscript>
+    </main>
+    {% include "_footer.html" %}
+</body>
+</html>

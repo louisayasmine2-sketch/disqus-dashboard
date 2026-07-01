@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Tools Directory - AI Operator Hub</title>
+    <meta name="description" content="Browse AI tools, automation platforms, SEO software, and productivity apps for small business operators.">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="AI Tools Directory - AI Operator Hub">
+    <meta property="og:description" content="Browse AI tools, automation platforms, SEO software, and productivity apps for small business operators.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
+</head>
+<body>
+    {% include "_nav.html" %}
+
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Directory</p>
+                <h1>AI tools for operators</h1>
+            </div>
+            <span class="count">{{ tools|length }} tools</span>
+        </header>
+
+        <section class="directory-intro">
+            <div>
+                <p>Use this directory to compare AI writing tools, automation platforms, support software, SEO tools, and productivity apps. Affiliate links will be added only after tools are reviewed and clearly disclosed.</p>
+            </div>
+            <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=tools_directory&utm_campaign=tool_finder">Get matched tools</a>
+        </section>
+
+        <section class="tools-grid">
+            {% for tool in tools %}
+                <article class="tool-card">
+                    <div>
+                        <p class="tag">{{ tool.category }}</p>
+                        <h2>{{ tool.name }}</h2>
+                        <p>{{ tool.use_case }}</p>
+                    </div>
+                    <dl>
+                        <div>
+                            <dt>Best for</dt>
+                            <dd>{{ tool.best_for }}</dd>
+                        </div>
+                        <div>
+                            <dt>Free plan</dt>
+                            <dd>{{ tool.free_plan }}</dd>
+                        </div>
+                        <div>
+                            <dt>Pricing note</dt>
+                            <dd>{{ tool.pricing_note }}</dd>
+                        </div>
+                        <div>
+                            <dt>Status</dt>
+                            <dd>{{ tool.review_status }}</dd>
+                        </div>
+                    </dl>
+                    <a class="tool-link" href="{{ tool.affiliate_url }}" rel="nofollow sponsored">View tool</a>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+
+    {% include "_footer.html" %}
+</body>
+</html>
