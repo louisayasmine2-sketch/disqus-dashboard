@@ -16,42 +16,96 @@
 <body>
     {% include "_nav.html" %}
 
-    <header class="hero">
+    <header class="hero" data-testid="home-hero">
         <div class="hero-content">
-            <p class="eyebrow">AI tools and automation</p>
-            <h1>Build smarter workflows with practical AI agents.</h1>
-            <p>Guides, templates, and discussions for small teams that want to use AI to publish faster, automate routine work, and grow with less chaos.</p>
+            <p class="eyebrow eyebrow-light">For small business operators</p>
+            <h1>Run your small business with AI workflows that actually ship.</h1>
+            <p class="hero-lede">AI Operator Hub gives small teams the tool picks, automation playbooks, and step-by-step guides to publish faster, cut busywork, and grow without extra hires.</p>
             <div class="hero-actions">
-                <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=hero&utm_campaign=tool_finder">Find your AI tools</a>
-                <a class="button button-secondary" href="{{ url_for('articles') }}">Explore Articles</a>
+                <a class="button button-primary" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=hero&utm_campaign=tool_finder" data-testid="hero-cta-tool-finder">Find your AI tools</a>
+                <a class="button button-ghost" href="{{ url_for('articles') }}" data-testid="hero-cta-articles">Explore articles</a>
             </div>
         </div>
     </header>
 
+    <section class="trust-strip" data-testid="trust-strip">
+        <div class="trust-strip-inner">
+            <div class="trust-item">
+                <span class="trust-metric">50+</span>
+                <span class="trust-label">Operator playbooks</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-metric">3-tool</span>
+                <span class="trust-label">Personalised stack picks</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-metric">Free</span>
+                <span class="trust-label">Tool finder quiz</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-metric">Weekly</span>
+                <span class="trust-label">New workflow guides</span>
+            </div>
+        </div>
+    </section>
+
     <main class="page">
-        <section class="section-heading">
-            <p class="eyebrow">Start here</p>
-            <h2>Latest AI operator guides</h2>
-        </section>
-
-        <section class="article-grid">
-            {% for article in articles %}
-                <article class="article-card">
-                    <p class="tag">{{ article.category }}</p>
-                    <h3><a href="{{ url_for('article_detail', slug=article.slug) }}">{{ article.title }}</a></h3>
-                    <p>{{ article.summary }}</p>
-                    <span>{{ article.read_time }} | Updated {{ article.updated }}</span>
+        <section class="features" data-testid="features-section">
+            <div class="section-heading">
+                <p class="eyebrow">How AI Operator Hub helps</p>
+                <h2>Everything a small team needs to operate with AI.</h2>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <span class="feature-icon" aria-hidden="true">◆</span>
+                    <h3>Pick the right AI stack</h3>
+                    <p>Answer a short quiz and get a focused 3-tool stack matched to your team size, budget, and use case.</p>
                 </article>
-            {% endfor %}
+                <article class="feature-card">
+                    <span class="feature-icon" aria-hidden="true">◇</span>
+                    <h3>Ship workflows faster</h3>
+                    <p>Copy-paste playbooks for content, sales, support, and ops. No fluff, just steps that work today.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon" aria-hidden="true">◈</span>
+                    <h3>Automate the routine</h3>
+                    <p>Templates and prompts for the repetitive work that eats your week - so your team can focus on growth.</p>
+                </article>
+            </div>
         </section>
 
-        <section class="site-cta">
+        <section class="articles-section" data-testid="articles-section">
+            <div class="section-heading section-heading-row">
+                <div>
+                    <p class="eyebrow">Start here</p>
+                    <h2>Latest AI operator guides</h2>
+                </div>
+                <a class="text-link" href="{{ url_for('articles') }}" data-testid="view-all-articles">View all articles →</a>
+            </div>
+
+            <div class="article-grid">
+                {% for article in articles %}
+                    <article class="article-card" data-testid="article-card-{{ loop.index }}">
+                        <p class="tag">{{ article.category }}</p>
+                        <h3><a href="{{ url_for('article_detail', slug=article.slug) }}">{{ article.title }}</a></h3>
+                        <p class="article-summary-short">{{ article.summary }}</p>
+                        <div class="article-card-meta">
+                            <span>{{ article.read_time }}</span>
+                            <span class="dot" aria-hidden="true">•</span>
+                            <span>Updated {{ article.updated }}</span>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="site-cta" data-testid="home-cta">
             <div>
                 <p class="eyebrow">Free tool finder</p>
                 <h2>Not sure which AI tools fit your workflow?</h2>
                 <p>Answer a short quiz and get a focused 3-tool stack for your business size, budget, and use case.</p>
             </div>
-            <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=home_cta&utm_campaign=tool_finder">Start the quiz</a>
+            <a class="button button-primary" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=home_cta&utm_campaign=tool_finder" data-testid="cta-start-quiz">Start the quiz</a>
         </section>
     </main>
     {% include "_footer.html" %}
