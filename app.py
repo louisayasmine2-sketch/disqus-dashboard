@@ -6,7 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask, Response, abort, redirect, render_template, request, url_for
 
-from database import close_db, get_cached_posts, get_cached_threads, init_db, save_posts, save_subscriber, save_threads
+from database import close_db, get_cached_posts, get_cached_threads, get_subscribers, init_db, save_posts, save_subscriber, save_threads
 from disqus_client import DisqusClient, DisqusClientError
 
 
@@ -206,6 +206,7 @@ def sitemap_xml():
 @app.route("/dashboard")
 def dashboard():
     error = None
+    subscribers = get_subscribers()
 
     try:
         threads = client.get_threads()
@@ -214,7 +215,7 @@ def dashboard():
         error = str(exc)
         threads = get_cached_threads()
 
-    return render_template("dashboard.html", threads=threads, error=error)
+    return render_template("dashboard.html", threads=threads, subscribers=subscribers, error=error)
 
 
 @app.route("/thread/<thread_id>")

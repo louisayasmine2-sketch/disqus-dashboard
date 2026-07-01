@@ -526,6 +526,50 @@ h2 {
     gap: 14px;
 }
 
+.subscriber-panel {
+    margin-bottom: 28px;
+}
+
+.subscriber-panel .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.subscriber-table {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    box-shadow: var(--shadow-sm);
+}
+
+.subscriber-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+}
+
+.subscriber-table th,
+.subscriber-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+.subscriber-table th {
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.subscriber-table tr:last-child td {
+    border-bottom: 0;
+}
+
 .directory-intro {
     display: flex;
     align-items: center;

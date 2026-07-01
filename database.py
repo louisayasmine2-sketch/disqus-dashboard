@@ -115,3 +115,20 @@ def save_subscriber(email, source):
         (email.strip().lower(), source.strip()),
     )
     db.commit()
+
+
+def get_subscribers(limit=100):
+    rows = (
+        get_db()
+        .execute(
+            """
+            SELECT email, source, created_at
+            FROM newsletter_subscribers
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+        .fetchall()
+    )
+    return [dict(row) for row in rows]

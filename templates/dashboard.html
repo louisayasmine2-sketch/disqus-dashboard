@@ -25,6 +25,44 @@
             </section>
         {% endif %}
 
+        <section class="subscriber-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Growth</p>
+                    <h2>Newsletter subscribers</h2>
+                </div>
+                <span class="count">{{ subscribers|length }} emails</span>
+            </div>
+
+            {% if subscribers %}
+                <div class="subscriber-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Source</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subscriber in subscribers %}
+                                <tr>
+                                    <td>{{ subscriber.email }}</td>
+                                    <td>{{ subscriber.source }}</td>
+                                    <td>{{ subscriber.created_at }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <h2>No subscribers yet</h2>
+                    <p>When visitors join from the homepage checklist form, their email will appear here.</p>
+                </div>
+            {% endif %}
+        </section>
+
         <section class="thread-list">
             {% if threads %}
                 {% for thread in threads %}
