@@ -1,7 +1,37 @@
+# Secrets
 .env
+.envrc
+
+# Python cache
 __pycache__/
 *.pyc
+*.py[codz]
+*$py.class
+
+# Local database
 *.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
 instance/
+.webassets-cache
+
+# Virtual environments
 .venv/
 venv/
+env/
+ENV/
+
+# Build and cache
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Editor temporary
+tempCodeRunnerFile.py
