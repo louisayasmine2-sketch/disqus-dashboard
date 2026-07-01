@@ -98,9 +98,24 @@ def articles():
     return render_template("articles.html", articles=ARTICLES, canonical_url=absolute_url("articles"))
 
 
+@app.route("/workflows")
+def workflows():
+    return render_template("workflows.html", canonical_url=absolute_url("workflows"))
+
+
 @app.route("/tools")
 def tools():
     return render_template("tools.html", tools=TOOLS, canonical_url=absolute_url("tools"))
+
+
+@app.route("/pricing")
+def pricing():
+    return render_template("pricing.html", canonical_url=absolute_url("pricing"))
+
+
+@app.route("/security")
+def security():
+    return render_template("security.html", canonical_url=absolute_url("security"))
 
 
 @app.route("/subscribe", methods=["POST"])
@@ -130,9 +145,24 @@ def privacy_policy():
     return render_template("privacy_policy.html", canonical_url=absolute_url("privacy_policy"))
 
 
+@app.route("/terms-of-use")
+def terms_of_use():
+    return render_template("terms_of_use.html", canonical_url=absolute_url("terms_of_use"))
+
+
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html", canonical_url=absolute_url("disclaimer"))
+
+
 @app.route("/affiliate-disclosure")
 def affiliate_disclosure():
     return render_template("affiliate_disclosure.html", canonical_url=absolute_url("affiliate_disclosure"))
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html", canonical_url=absolute_url("login"))
 
 
 @app.route("/article")
@@ -173,11 +203,16 @@ def robots_txt():
 def sitemap_xml():
     urls = [
         {"loc": absolute_url("home"), "priority": "1.0"},
+        {"loc": absolute_url("workflows"), "priority": "0.9"},
+        {"loc": absolute_url("tools"), "priority": "0.9"},
+        {"loc": absolute_url("pricing"), "priority": "0.8"},
         {"loc": absolute_url("articles"), "priority": "0.9"},
-        {"loc": absolute_url("tools"), "priority": "0.8"},
+        {"loc": absolute_url("security"), "priority": "0.7"},
         {"loc": absolute_url("about"), "priority": "0.6"},
         {"loc": absolute_url("contact"), "priority": "0.6"},
         {"loc": absolute_url("privacy_policy"), "priority": "0.5"},
+        {"loc": absolute_url("terms_of_use"), "priority": "0.5"},
+        {"loc": absolute_url("disclaimer"), "priority": "0.5"},
         {"loc": absolute_url("affiliate_disclosure"), "priority": "0.5"},
     ]
     urls.extend(

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Workflows - DevelobMail</title>
+    <meta name="description" content="Explore AI-assisted email workflows for campaigns, follow-ups, support replies, onboarding, and small team operations.">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="Email Workflows - DevelobMail">
+    <meta property="og:description" content="Practical AI-assisted email workflows for small teams.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
+</head>
+<body>
+    {% include "_nav.html" %}
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Workflows</p>
+                <h1>Email workflows for small teams that need speed and control.</h1>
+                <p class="section-lede">Use DevelobMail playbooks to turn repeated email tasks into repeatable AI-assisted systems.</p>
+            </div>
+        </header>
+        <section class="feature-grid">
+            <article class="feature-card">
+                <span class="feature-icon" aria-hidden="true">01</span>
+                <h3>Campaign draft workflow</h3>
+                <p>Plan a message, generate a first draft, review it with a human approval step, and prepare the final version for sending.</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon" aria-hidden="true">02</span>
+                <h3>Lead follow-up workflow</h3>
+                <p>Capture a lead, classify intent, draft a useful reply, and schedule the next follow-up before the conversation goes cold.</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon" aria-hidden="true">03</span>
+                <h3>Support response workflow</h3>
+                <p>Summarize customer context, draft a helpful response, flag sensitive cases, and keep response quality consistent.</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon" aria-hidden="true">04</span>
+                <h3>Newsletter workflow</h3>
+                <p>Collect ideas, write subject lines, draft sections, review links, and turn weekly updates into a simple repeatable system.</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon" aria-hidden="true">05</span>
+                <h3>Customer onboarding workflow</h3>
+                <p>Create welcome emails, setup reminders, education notes, and check-ins that help new customers reach value faster.</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon" aria-hidden="true">06</span>
+                <h3>Reactivation workflow</h3>
+                <p>Identify inactive contacts, draft respectful re-engagement messages, and track which offers or guides get a response.</p>
+            </article>
+        </section>
+        <section class="site-cta">
+            <div>
+                <p class="eyebrow">Start now</p>
+                <h2>Match your workflow with the right AI tools.</h2>
+                <p>The free finder gives you a short practical tool stack based on team size, budget, and use case.</p>
+            </div>
+            <a class="button button-primary" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=workflows&utm_campaign=tool_finder">Find your tools</a>
+        </section>
+    </main>
+    {% include "_footer.html" %}
+</body>
+</html>

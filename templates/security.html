@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Security - DevelobMail</title>
+    <meta name="description" content="How DevelobMail thinks about security, privacy, analytics, comments, and responsible AI-assisted workflow guidance.">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="Security - DevelobMail">
+    <meta property="og:description" content="Security and trust principles for DevelobMail.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
+</head>
+<body>
+    {% include "_nav.html" %}
+    <main class="content-page">
+        <section class="content-shell">
+            <p class="eyebrow">Security</p>
+            <h1>Security and trust principles</h1>
+            <p>DevelobMail is built for practical email workflow education and tool discovery. We keep the public site simple, avoid asking for unnecessary sensitive data, and clearly separate editorial content from affiliate relationships.</p>
+            <h2>Human review matters</h2>
+            <p>We recommend AI-assisted workflows that keep a human approval step before important customer, subscriber, or partner emails are sent.</p>
+            <h2>Analytics and comments</h2>
+            <p>We use analytics to understand page performance and Disqus for comments. These third-party services may process data under their own policies.</p>
+            <h2>Affiliate transparency</h2>
+            <p>When partner links are used, we disclose them. Recommendations should be evaluated against your own privacy, budget, and compliance needs.</p>
+            <h2>Contact</h2>
+            <p>For security, privacy, or correction requests, contact <a href="mailto:hello@develobmail.com">hello@develobmail.com</a>.</p>
+        </section>
+    </main>
+    {% include "_footer.html" %}
+</body>
+</html>

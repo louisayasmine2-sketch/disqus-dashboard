@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ article.title }} - AI Operator Hub</title>
+    <title>{{ article.title }} - DevelobMail</title>
     <meta name="description" content="{{ article.meta_description or article.summary }}">
     <link rel="canonical" href="{{ canonical_url }}">
     <meta property="og:title" content="{{ article.title }}">
@@ -39,7 +39,7 @@
                                 <h2>Not sure which AI tools fit your workflow?</h2>
                                 <p>Answer a few quick questions and get a short, practical AI tool stack for your business.</p>
                             </div>
-                            <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=article_inline_cta&utm_campaign=tool_finder&utm_content={{ article.slug }}">Find your AI tools</a>
+                            <a class="button" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=article_inline_cta&utm_campaign=tool_finder&utm_content={{ article.slug }}">Find your AI tools</a>
                         </aside>
                     {% endif %}
                 {% endfor %}
@@ -74,7 +74,7 @@
                 <section class="article-extra cta-panel">
                     <h2>{{ article.cta.title }}</h2>
                     <p>{{ article.cta.body }}</p>
-                    <a class="button" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=article_cta&utm_campaign=tool_finder&utm_content={{ article.slug }}">Find your AI tools</a>
+                    <a class="button" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=article_cta&utm_campaign=tool_finder&utm_content={{ article.slug }}">Find your AI tools</a>
                 </section>
             {% endif %}
 

@@ -1,11 +1,14 @@
 <nav class="site-nav">
-    <a class="brand" href="{{ url_for('home') }}">AI Operator Hub</a>
+    <a class="brand" href="{{ url_for('home') }}">DevelobMail</a>
     <div>
+        <a href="{{ url_for('workflows') }}">Workflows</a>
+        <a href="{{ url_for('tools') }}">Email Tools</a>
+        <a href="{{ url_for('pricing') }}">Pricing</a>
         <a href="{{ url_for('articles') }}">Articles</a>
-        <a href="{{ url_for('tools') }}">Tools</a>
+        <a href="{{ url_for('security') }}">Security</a>
         <a href="{{ url_for('about') }}">About</a>
         <a href="{{ url_for('contact') }}">Contact</a>
-        <a href="{{ url_for('dashboard') }}">Dashboard</a>
-        <a class="nav-cta" href="{{ tool_finder_url }}?utm_source=ai_operator_hub&utm_medium=nav&utm_campaign=tool_finder">Find your tools</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a class="nav-cta" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=nav&utm_campaign=tool_finder">Find your tools</a>
     </div>
 </nav>

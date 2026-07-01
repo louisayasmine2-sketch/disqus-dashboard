@@ -272,6 +272,17 @@ a:hover {
     margin-bottom: 8px;
 }
 
+.features + .features {
+    margin-top: 54px;
+}
+
+.section-lede {
+    max-width: 760px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -320,6 +331,56 @@ a:hover {
     color: var(--muted);
     line-height: 1.65;
     font-size: 0.98rem;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    box-shadow: var(--shadow-sm);
+}
+
+.pricing-card h2,
+.pricing-card p {
+    margin: 0;
+}
+
+.pricing-card .price {
+    color: var(--navy);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.pricing-card ul {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 8px;
+    padding-left: 20px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.button-secondary-dark {
+    background: var(--navy);
+}
+
+.button-secondary-dark:hover {
+    background: #132946;
+}
+
+.login-shell .button {
+    margin-top: 10px;
 }
 
 .page-header,
@@ -1024,7 +1085,8 @@ h2 {
     }
 
     .article-grid,
-    .feature-grid {
+    .feature-grid,
+    .pricing-grid {
         grid-template-columns: 1fr;
     }
 

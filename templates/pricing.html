@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pricing - DevelobMail</title>
+    <meta name="description" content="Simple DevelobMail pricing options for AI-assisted email workflows, templates, and small team guidance.">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:title" content="Pricing - DevelobMail">
+    <meta property="og:description" content="Simple pricing for AI-assisted email workflow guidance and tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include "_analytics.html" %}
+</head>
+<body>
+    {% include "_nav.html" %}
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Pricing</p>
+                <h1>Start free. Upgrade when your email workflow needs more structure.</h1>
+                <p class="section-lede">These packages are staged for launch. Affiliate and paid workflow offers will be added only when they are ready and clearly disclosed.</p>
+            </div>
+        </header>
+        <section class="pricing-grid">
+            <article class="pricing-card">
+                <p class="tag">Free</p>
+                <h2>Tool Finder</h2>
+                <p class="price">$0</p>
+                <ul>
+                    <li>AI tool stack quiz</li>
+                    <li>Starter workflow guides</li>
+                    <li>Weekly article updates</li>
+                </ul>
+                <a class="button" href="{{ tool_finder_url }}?utm_source=develobmail&utm_medium=pricing&utm_campaign=tool_finder">Start free</a>
+            </article>
+            <article class="pricing-card">
+                <p class="tag">Soon</p>
+                <h2>Workflow Library</h2>
+                <p class="price">$19/mo</p>
+                <ul>
+                    <li>Email campaign templates</li>
+                    <li>Follow-up playbooks</li>
+                    <li>Approval checklists</li>
+                </ul>
+                <a class="button button-secondary-dark" href="{{ url_for('contact') }}">Request access</a>
+            </article>
+            <article class="pricing-card">
+                <p class="tag">Teams</p>
+                <h2>Operator Setup</h2>
+                <p class="price">Custom</p>
+                <ul>
+                    <li>Workflow mapping</li>
+                    <li>Tool stack recommendations</li>
+                    <li>Small team operating system review</li>
+                </ul>
+                <a class="button button-secondary-dark" href="{{ url_for('contact') }}">Contact us</a>
+            </article>
+        </section>
+    </main>
+    {% include "_footer.html" %}
+</body>
+</html>
